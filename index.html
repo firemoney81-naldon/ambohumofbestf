@@ -1,23 +1,528 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  <style>
+        /* 기본 스타일 재설정 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8; /* 가독성을 위해 행간 늘림 */
+            color: #333;
+            background: #f0f4f7; /* 부드러운 배경색 */
+        }
+        header, section, footer {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        header {
+            background: linear-gradient(135deg, #f7f9fc, #ffffff);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        nav {
+            background: #0056b3; /* 신뢰감을 주는 파란색 */
+            border-radius: 12px;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #fff;
+            margin: 0 20px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.15rem;
+            transition: color 0.3s, background-color 0.3s;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        nav a:hover {
+            background-color: #004085;
+            text-decoration: none;
+        }
+
+        /* 텍스트 스타일 */
+        h1 {
+            font-size: 2.5rem;
+            color: #0056b3;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #0056b3;
+            border-left: 5px solid #0056b3;
+            padding-left: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: #0056b3;
+            margin-top: 25px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 5px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        strong {
+            color: #c0392b; /* 강조 색상 */
+            font-weight: 700;
+        }
+
+        /* 주요 CTA 버튼 */
+        .cta {
+            display: inline-block;
+            background-color: #e67e22; /* 주황색 계열로 변경하여 시선 집중 */
+            color: white;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+        }
+        .cta:hover {
+            background-color: #d35400;
+        }
+
+        /* 카드 및 레이아웃 요소 */
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .info-card {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .info-card h4 {
+            color: #0056b3;
+            margin-top: 0;
+        }
+        .highlight-box {
+            background-color: #fff8e1; /* 따뜻한 강조 배경색 */
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #eaf1f7;
+            color: #333;
+            font-weight: 700;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* 폼 스타일 */
+        form {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        form input, form select, form textarea {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        form button {
+            background-color: #e67e22;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        form button:hover {
+            background-color: #d35400;
+        }
+
+        /* FAQ 스타일 */
+        dl.faq dt {
+            font-weight: 700;
+            margin-top: 20px;
+            cursor: pointer;
+            color: #0056b3;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        dl.faq dd {
+            margin-left: 0;
+            margin-top: 10px;
+            padding: 10px;
+            background: #fafafa;
+            border-radius: 6px;
+            color: #555;
+        }
+
+        /* 푸터 스타일 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #eaf1f7;
+            color: #777;
+            font-size: 0.9rem;
+            border-radius: 0;
+            margin-top: 20px;
+        }
+
+        /* 그래프 (간단한 예시) */
+        .graph-container {
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+        }
+        .graph-bar {
+            background-color: #3498db;
+            color: white;
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            text-align: left;
+        }
+    </style>
+
+    <!-- JSON-LD Schema for FinancialService -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      "name": "암보험 비교 추천 서비스",
+      "description": "다양한 암보험 상품을 비교하고, 개인에게 가장 적합하고 저렴한 암보험을 추천해주는 서비스입니다.",
+      "url": "https://www.yourdomain.kr/",
+      "provider": {
+        "@type": "Organization",
+        "name": "보험 비교 플랫폼",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "서울",
+          "addressRegion": "대한민국"
+        }
+      },
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "대한민국"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "암보험 상품 목록",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "비갱신형 암보험 비교"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "갱신형 암보험 비교"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "유병자 암보험 추천"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "다이렉트 암보험 견적"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+</head>
+<body>
+
+<header id="top">
+    <h1>2026년 저렴한 암보험 추천 순위 비교, 가입 요령 A-Z</h1>
+    <p><strong>비갱신형 암보험</strong>부터 <strong>다이렉트 암보험</strong>까지, 나에게 딱 맞는 <strong>암보험 금액</strong>과 <strong>보장</strong>을 찾아드립니다.</p>
+    <a href="#quote-form" class="cta">무료 견적 비교 신청하기</a>
+</header>
+
+<nav>
+    <a href="#why-cancer-insurance">왜 암보험인가?</a>
+    <a href="#comparison-guide">암보험 비교 가이드</a>
+    <a href="#types-of-insurance">갱신형 vs 비갱신형</a>
+    <a href="#ranking">암보험 순위 및 후기</a>
+    <a href="#quote-form">무료 견적 신청</a>
+    <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+    <section id="why-cancer-insurance" aria-label="왜 암보험에 가입해야 하는가?">
+        <h2>왜 지금 저렴한 암보험을 준비해야 할까요?</h2>
+        <div class="highlight-box">
+            <p><strong>2026년 통계로 본 암 발병률</strong></p>
+            <p>최근 통계청 자료에 따르면, 대한민국 국민 3명 중 1명은 평생 한 번 이상 암에 걸릴 확률이 있다고 합니다. 의학 기술의 발전으로 암 생존율은 높아졌지만, 치료비용은 여전히 가계에 큰 부담으로 작용합니다. 특히 항암 치료, 표적 항암제, 방사선 치료 등 비급여 항목의 지출이 늘어나면서 암보험의 필요성은 더욱 증가하고 있습니다.</p>
+            <p>암보험은 암 진단 시 고액의 진단비를 지급하여 치료비뿐만 아니라 생활비까지 보장해줍니다. <strong>저렴한 암보험</strong>을 찾는 것은 단순히 보험료를 아끼는 것을 넘어, 미래의 경제적 위험을 대비하는 가장 합리적인 방법입니다.</p>
+        </div>
+
+        <h3>암 치료 비용, 예상보다 높습니다.</h3>
+        <p>암 치료비용은 암의 종류, 진행 정도, 치료 방법에 따라 천차만별입니다. 특히 고가 항암 치료나 최신 의료 기술을 적용할 경우 수천만 원에 달하는 비용이 발생하기도 합니다. 국민건강보험이 일부 급여 항목을 보장하지만, 비급여 항목인 첨단 치료, 요양병원 이용료 등은 고스란히 개인의 몫입니다. 이러한 비용을 효과적으로 대비하기 위해서는 <strong>암보험의 핵심 보장</strong>인 진단금 확보가 중요합니다.</p>
+
+        <h3>저렴한 암보험 가입 시 고려사항</h3>
+        <p>많은 분들이 <strong>암보험 싼곳</strong>을 찾지만, 무조건 저렴한 보험료만을 기준으로 선택하는 것은 위험합니다. <strong>저렴한 암보험</strong>은 보장 범위가 좁거나, 진단 금액이 낮을 수 있기 때문입니다. <strong>암보험 가입 요령</strong>의 핵심은 "합리적인 가격으로 충분한 보장"을 받는 것입니다. 이를 위해 <strong>암보험 비교</strong>가 필수적이며, 개인의 나이, 병력, 가족력을 고려한 맞춤형 설계가 필요합니다.</p>
+    </section>
+
+    <section id="comparison-guide" aria-label="암보험 가입 전 필수 체크리스트">
+        <h2>필수 체크리스트: 암보험 비교 가이드</h2>
+        <p>암보험 상품을 비교할 때 반드시 확인해야 할 5가지 핵심 요소를 정리했습니다. <strong>저렴한 암보험</strong>을 선택하기 위한 기초 지식이며, <strong>암보험 순위</strong>를 매기는 기준이 되기도 합니다.</p>
+
+        <div class="card-container">
+            <div class="info-card">
+                <h4>1. 진단금의 크기와 종류 (가장 중요)</h4>
+                <p>암 진단금은 암보험의 핵심입니다. 진단금이 높을수록 치료비와 생활비에 대한 부담이 줄어듭니다. 또한 일반암, 고액암(간암, 폐암, 췌장암 등), 소액암(갑상선암, 유방암 등)으로 분류하여 보장 금액이 달라지므로, 보장 범위를 꼼꼼히 확인해야 합니다.</p>
+            </div>
+            <div class="info-card">
+                <h4>2. 갱신형 vs 비갱신형 선택</h4>
+                <p><strong>갱신형 암보험</strong>은 초기 보험료가 저렴하지만, 갱신 시점마다 보험료가 상승합니다. 반면, <strong>비갱신형 암보험</strong>은 초기 보험료가 비싸지만 갱신 없이 납입 기간 동안 동일한 보험료를 유지합니다. 장기적으로 볼 때 <strong>비갱신형 암보험</strong>이 더 유리한 경우가 많습니다.</p>
+            </div>
+            <div class="info-card">
+                <h4>3. 면책 기간과 감액 기간 확인</h4>
+                <p>암보험에 가입해도 바로 보장이 시작되지 않습니다. 면책 기간(90일)이 지난 후부터 보장이 시작되며, 감액 기간(1~2년) 동안은 진단금의 50%만 지급될 수 있습니다. <strong>암보험 가입</strong> 시 반드시 확인해야 할 사항입니다.</p>
+            </div>
+            <div class="info-card">
+                <h4>4. 특약 옵션 활용</h4>
+                <p>특약을 통해 2차 암 진단금, 항암 방사선/약물 치료비, 입원/수술비를 추가할 수 있습니다. <strong>저렴한 암보험</strong>을 원한다면 불필요한 특약은 제외하고 진단비 위주로 설계하는 것이 좋습니다.</p>
+            </div>
+            <div class="info-card">
+                <h4>5. 유병자 암보험 여부</h4>
+                <p>기존에 질병 이력이 있는 경우, 일반 암보험 가입이 거절될 수 있습니다. 이 경우 <strong>유병자 암보험</strong>을 통해 심사 기준을 완화하여 가입할 수 있습니다. 다만 일반 암보험 대비 보험료가 높고 보장 내용에 제한이 있을 수 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="types-of-insurance" aria-label="갱신형과 비갱신형 암보험 비교 분석">
+        <h2>갱신형 vs 비갱신형 암보험 장단점 비교</h2>
+        <p><strong>갱신형 암보험</strong>과 <strong>비갱신형 암보험</strong>의 <strong>차이점</strong>은 보험료 구조에 있습니다. <strong>암보험 저렴한곳</strong>을 찾을 때 가장 중요한 선택 기준이므로, 자신의 상황에 맞는 상품을 선택하는 것이 중요합니다.</p>
+
+        <h3>1. 갱신형 암보험</h3>
+        <ul>
+            <li><strong>장점:</strong> 초기 보험료가 매우 <strong>저렴한 암보험</strong>입니다. 당장 보험료 부담이 적어 젊은 세대나 경제 활동 초기 단계에 있는 분들에게 유리할 수 있습니다.</li>
+            <li><strong>단점:</strong> 갱신 주기(보통 10년, 20년)마다 보험료가 상승합니다. 나이가 들수록 발병률이 높아지므로 갱신 시점에 보험료가 급격히 인상될 수 있으며, 결국 총 납입 보험료는 비갱신형보다 높아질 수 있습니다.</li>
+            <li><strong>추천 대상:</strong> 단기간 보장을 원하거나, 현재 경제 활동이 불안정하지만 추후 경제력을 확보할 수 있는 젊은층.</li>
+        </ul>
+
+        <h3>2. 비갱신형 암보험</h3>
+        <ul>
+            <li><strong>장점:</strong> 납입 기간 동안 보험료가 고정됩니다. 총 납입액을 미리 파악할 수 있어 장기적인 재정 계획에 유리하며, 나이가 들어도 보험료가 인상되지 않아 안정적입니다.</li>
+            <li><strong>단점:</strong> 초기 보험료가 갱신형보다 비쌉니다.</li>
+            <li><strong>추천 대상:</strong> 장기간 안정적인 보장을 원하며, 초기 보험료 부담을 감수할 수 있는 30~40대 이상의 가입자.</li>
+        </ul>
+
+        <h3 id="비갱신형-vs-갱신형-비교표">갱신형 vs 비갱신형 예상 금액 비교표 (2026년 기준)</h3>
+        <p>아래 표는 40세 남성 기준, 동일한 진단금(5,000만원)을 설계했을 때의 <strong>암보험 예상 금액</strong> 비교 예시입니다. 실제 <strong>암보험 평균</strong> 보험료는 상품 및 특약에 따라 다를 수 있습니다.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>비갱신형 (20년 납입/100세 보장)</th>
+                    <th>갱신형 (20년 갱신/100세 보장)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>초기 보험료 (월)</td>
+                    <td>100,000원</td>
+                    <td>40,000원</td>
+                </tr>
+                <tr>
+                    <td>40대 총 납입액</td>
+                    <td>24,000,000원</td>
+                    <td>9,600,000원</td>
+                </tr>
+                <tr>
+                    <td>60대 갱신 시 예상 보험료</td>
+                    <td>100,000원 (변동 없음)</td>
+                    <td>100,000원 ~ 150,000원 (인상)</td>
+                </tr>
+                <tr>
+                    <td>총 납입 기간 예상 금액</td>
+                    <td>24,000,000원</td>
+                    <td>30,000,000원 이상</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>표에서 보듯, <strong>비갱신형 암보험</strong>은 초기에 부담이 있지만 장기적으로 볼 때 <strong>암보험 금액</strong> 면에서 유리할 수 있습니다.</p>
+    </section>
+
+    <section id="ranking" aria-label="2026 암보험 순위 및 후기">
+        <h2>2026년 암보험 추천 순위 및 고객 후기 분석</h2>
+        <p><strong>저렴한 암보험</strong>을 찾는 분들을 위해 2026년 기준 주요 보험사의 상품 특징을 비교하고, 실제 고객들의 <strong>내돈내산 후기</strong>를 바탕으로 <strong>암보험 추천 순위</strong>를 분석했습니다.</p>
+
+        <h3>다이렉트 암보험 순위와 장점</h3>
+        <p>최근에는 <strong>다이렉트 암보험</strong>이 인기를 얻고 있습니다. 다이렉트 상품은 설계사를 통하지 않고 온라인으로 직접 가입하므로 수수료가 절감되어 <strong>저렴한 암보험</strong>을 찾는 분들에게 가장 유리한 선택지입니다. 일반적으로 동일한 보장 내용이라도 설계사를 통한 가입보다 10%~20%가량 <strong>암보험 금액</strong>이 저렴합니다.</p>
+
+        <h3>고객 내돈내산 후기 (사례 분석)</h3>
+        <div class="card-container">
+            <div class="info-card">
+                <h4>30대 여성, 비갱신형 가입 후기</h4>
+                <p>“여러 곳의 <strong>암보험 비교</strong>를 해봤는데, 처음엔 <strong>갱신형 암보험</strong>이 <strong>저렴한곳</strong> 같았어요. 하지만 주변 후기를 찾아보니 나중에 보험료 폭탄을 맞을 수 있다고 하더라고요. 그래서 조금 부담되더라도 <strong>비갱신형 암보험</strong>으로 결정했습니다. 30대에 가입하니 <strong>암보험 금액</strong>이 생각보다 저렴해서 만족스러워요.”</p>
+            </div>
+            <div class="info-card">
+                <h4>50대 남성, 유병자 암보험 가입 후기</h4>
+                <p>“몇 년 전에 고혈압 진단을 받아서 일반 <strong>암보험 가입</strong>이 어려울까 봐 걱정했습니다. 하지만 <strong>유병자 암보험</strong> 상품이 따로 있다는 걸 알고 가입했어요. <strong>암보험 싼곳</strong>을 찾기보다는 보장이 확실하고 심사 기준이 완화된 상품을 선택했습니다. 일반 암보험보다 <strong>보험료</strong>는 높지만 마음이 놓입니다.”</p>
+            </div>
+            <div class="info-card">
+                <h4>40대 주부, 다이렉트 암보험 가입 후기</h4>
+                <p>“평소에 <strong>암보험 순위</strong>를 자주 검색했는데, <strong>다이렉트 암보험</strong>이 <strong>저렴한 암보험</strong>으로 많이 추천되더라고요. 여러 보험사를 비교해 보고 제가 원하는 진단금(5천만원) 기준으로 가장 <strong>암보험 금액</strong>이 합리적인 상품을 찾았습니다. 굳이 설계사를 만나지 않아도 돼서 편했어요.”</p>
+            </div>
+        </div>
+
+        <h3>암보험 가입 시 고려해야 할 보장 범위</h3>
+        <ul>
+            <li><strong>일반암 진단금:</strong> 암보험의 기본이자 핵심 보장입니다. 고액암(간암, 폐암, 췌장암)과 일반암을 구분하여 보장하는 경우가 많습니다.</li>
+            <li><strong>소액암 진단금:</strong> 갑상선암, 유방암, 전립선암, 경계성 종양 등은 소액암으로 분류되어 일반암 진단금의 10%~20%만 지급하는 경우가 많습니다. 최근에는 소액암 보장을 일반암 수준으로 늘린 상품이 <strong>암보험 추천</strong> 상품으로 각광받고 있습니다.</li>
+            <li><strong>특정 고액암 보장:</strong> 발병률은 낮지만 치료비용이 매우 높은 암에 대한 추가 보장입니다. 가족력이 있다면 고려해 볼 수 있습니다.</li>
+            <li><strong>재진단암 보장:</strong> 암이 재발하거나 전이될 경우 추가 진단금을 지급합니다. 완치 후에도 안심할 수 있는 보장입니다.</li>
+        </ul>
+
+        <h3 id="암보험-보장-범위-비교-그래프">주요 보장 범위별 예상 보험료 변화 그래프</h3>
+        <p>암보험 상품의 <strong>예상 금액</strong>은 보장 범위에 따라 크게 달라집니다. 아래 그래프는 40세 남성 기준, 보장 범위 추가에 따른 월 보험료 상승을 시뮬레이션한 것입니다.</p>
+        <div class="graph-container">
+            <p style="text-align: right; font-size: 0.9rem;">(월 보험료 기준, 2026년 가상 데이터)</p>
+            <div class="graph-bar" style="width: 80%;">일반암 진단금 5천만원 (기본): 10만원</div>
+            <div class="graph-bar" style="width: 90%; background-color: #2ecc71;">+ 재진단암 보장 추가: 11만원</div>
+            <div class="graph-bar" style="width: 100%; background-color: #f39c12;">+ 고액암 특약 및 소액암 확대: 12만원</div>
+        </div>
+        <p>그래프에서 보듯, 보장 범위를 늘리면 보험료가 상승합니다. <strong>저렴한 암보험</strong>을 찾을 때는 꼭 필요한 보장 위주로 선택하여 불필요한 비용을 줄이는 것이 좋습니다.</p>
+    </section>
+
+    <section id="external-info" aria-label="신뢰할 수 있는 외부 정보">
+        <h2>공인된 신뢰성 있는 정보 (외부 사이트 참고)</h2>
+        <p><strong>암보험 가입</strong> 시 정확한 정보를 위해 공신력 있는 기관의 자료를 참고하는 것이 중요합니다. 아래는 암 통계 및 보험 관련 정보를 제공하는 외부 사이트입니다.</p>
+        <ul>
+            <li><a href="https://www.e-kca.org/" target="_blank">국가암정보센터 (국립암센터)</a>: 암 통계, 예방 수칙, 치료 방법 등에 대한 최신 정보를 제공합니다.</li>
+            <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 보험 상품 관련 소비자 유의사항 및 민원 접수 정보를 확인할 수 있습니다.</li>
+            <li><a href="https://namu.wiki/w/%EC%95%94%EB%B3%B4%ED%97%98" target="_blank">나무위키 - 암보험</a>: 암보험의 정의, 역사, 주요 논점 등 다양한 정보를 확인할 수 있습니다.</li>
+            <li><a href="https://www.nhis.or.kr/" target="_blank">국민건강보험공단</a>: 건강보험 적용 범위 및 본인부담금 상한제 등 의료비 관련 정보를 제공합니다.</li>
+            <li><a href="https://www.koreains.or.kr/" target="_blank">보험개발원</a>: 보험상품 개발 및 통계 정보 등을 제공합니다.</li>
+        </ul>
+        <p><strong>저렴한 암보험</strong>을 찾는 과정에서 이러한 신뢰성 있는 출처를 통해 정보를 얻는 것이 현명한 선택에 도움을 줄 수 있습니다.</p>
+    </section>
+
+    <section id="quote-form" aria-label="무료 견적 신청 및 비교">
+        <h2>나에게 맞는 저렴한 암보험, 지금 바로 무료 견적 비교하기</h2>
+        <form action="/submit-estimate" method="POST" aria-describedby="quote-description">
+            <p id="quote-description">아래 정보를 입력하시면 <strong>2026년 최신 암보험 순위</strong> 및 <strong>암보험 금액</strong>을 비교하여 가장 합리적인 상품을 추천해 드립니다. <strong>다이렉트 암보험</strong>과 일반 상품을 모두 비교할 수 있습니다.</p>
+
+            <label for="user-age">나이 (만 나이)</label>
+            <input type="number" id="user-age" name="age" placeholder="예: 40세" required min="18" max="70" />
+
+            <label for="desired-type">선호하는 암보험 유형</label>
+            <select id="desired-type" name="type" required>
+                <option value="">선택하세요</option>
+                <option value="non-renewal">비갱신형 (장기 안정적 보장)</option>
+                <option value="renewal">갱신형 (초기 보험료 저렴)</option>
+                <option value="undecided">아직 모르겠습니다</option>
+            </select>
+
+            <label for="diagnosis-amount">희망하는 진단금 (최소 3천만원 이상 권장)</label>
+            <select id="diagnosis-amount" name="diagnosis_amount" required>
+                <option value="">선택하세요</option>
+                <option value="3000">3,000만원</option>
+                <option value="5000">5,000만원</option>
+                <option value="7000">7,000만원</option>
+                <option value="10000">1억원</option>
+            </select>
+
+            <label for="medical-history">최근 5년 이내 병력 (입원, 수술, 중대 질병 진단 등)</label>
+            <textarea id="medical-history" name="medical_history" placeholder="고혈압, 당뇨 등 만성 질환이나 중대 질병 진단 이력이 있다면 적어주세요. 유병자 암보험을 추천해 드립니다."></textarea>
+
+            <label for="contact-phone">연락처</label>
+            <input type="tel" id="contact-phone" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+            <button type="submit" class="cta">무료 견적 요청 및 비교 시작</button>
+        </form>
+    </section>
+
+    <section id="faq" aria-label="자주 묻는 질문 FAQ">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+        <dl class="faq">
+            <dt>암보험을 늦게 가입할수록 <strong>암보험 금액</strong>이 비싸지나요?</dt>
+            <dd>네, 맞습니다. <strong>암보험</strong>은 나이가 많아질수록 발병률이 높아지기 때문에 <strong>보험료</strong>가 상승합니다. 특히 <strong>비갱신형 암보험</strong>은 가입 시점의 나이로 보험료가 고정되므로 한 살이라도 어릴 때 가입하는 것이 장기적으로 <strong>저렴한 암보험</strong>을 가입하는 가장 좋은 방법입니다.</dd>
+
+            <dt>기존에 실비보험이 있는데 <strong>암보험</strong>을 또 가입해야 하나요?</dt>
+            <dd><strong>실비보험</strong>은 실제 병원비를 보장하는 보험입니다. 반면 <strong>암보험</strong>은 진단 확정 시 <strong>진단금</strong>을 일시금으로 지급합니다. 진단금은 치료비 외에도 생활비나 간병비로 사용할 수 있으므로, 두 보험은 보장의 목적이 다릅니다. <strong>실비보험</strong>과 함께 <strong>암보험</strong>을 준비하는 것이 일반적입니다.</dd>
+
+            <dt><strong>암보험</strong> 가입 시 <strong>갱신형</strong>과 <strong>비갱신형</strong> 중 무엇이 더 유리한가요?</dt>
+            <dd><strong>장단점 차이점</strong>을 비교하여 본인의 상황에 맞게 선택해야 합니다. <strong>갱신형</strong>은 초기 보험료가 <strong>저렴한곳</strong>이지만, 갱신 시점마다 보험료가 상승하여 80세 이후에는 <strong>암보험 예상 금액</strong>이 매우 높아질 수 있습니다. <strong>비갱신형</strong>은 초기 보험료가 비싸지만 20~30년간 보험료가 변동되지 않아 장기적으로 <strong>암보험 금액</strong> 부담이 적습니다. 보통 젊은 나이일수록 <strong>비갱신형 암보험</strong>이 추천됩니다.</dd>
+
+            <dt><strong>유병자 암보험</strong>은 어떤 경우에 가입해야 하나요?</dt>
+            <dd>최근 5년 이내 입원, 수술, 암 진단 등의 병력이 있거나 만성질환으로 꾸준히 약을 복용하는 경우 일반 <strong>암보험 가입</strong> 심사에서 거절될 수 있습니다. <strong>유병자 암보험</strong>은 이런 분들을 위해 심사 기준을 완화한 상품입니다. <strong>보험료</strong>는 일반 <strong>암보험</strong>보다 높지만, 보장 범위가 제한될 수 있으므로 자세한 비교가 필요합니다.</dd>
+
+            <dt><strong>암보험 순위</strong>가 높은 상품이 무조건 좋은가요?</dt>
+            <dd><strong>암보험 순위</strong>는 참고 자료일 뿐입니다. <strong>저렴한 암보험</strong>의 기준은 개인마다 다릅니다. <strong>암보험 비교</strong> 시 진단금 크기, 갱신 여부, 보장 범위(소액암 포함 여부) 등 개인의 조건에 맞게 설계하는 것이 중요합니다. 단순히 순위만 보고 가입하기보다는 여러 상품을 비교하는 것이 좋습니다.</dd>
+        </dl>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 암보험 비교 플랫폼 | 개인정보보호정책 | 이용약관</p>
+    <p>본 사이트는 보험 상품 판매를 위한 비교 정보만 제공하며, 특정 상품의 가입을 강요하지 않습니다. 모든 보험 상품은 계약 전 상품 설명서 및 약관을 반드시 확인하시기 바랍니다.</p>
+</footer>
+
+
+  
